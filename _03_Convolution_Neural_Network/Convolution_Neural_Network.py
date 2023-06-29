@@ -42,9 +42,9 @@ class Digit(nn.Module):
 def read_data():
     # 这里可自行修改数据预处理，batch大小也可自行调整
     # 保持本地训练的数据读取和这里一致
-    dataset_train = torchvision.datasets.CIFAR10(root='../data/exp03', train=True, download=True,
+    dataset_train = torchvision.datasets.CIFAR10(root='../data/exp03', train=True, download=False,
                                                  transform=torchvision.transforms.ToTensor())
-    dataset_val = torchvision.datasets.CIFAR10(root='../data/exp03', train=False, download=True,
+    dataset_val = torchvision.datasets.CIFAR10(root='../data/exp03', train=False, download=False,
                                                transform=torchvision.transforms.ToTensor())
     data_loader_train = DataLoader(dataset=dataset_train, batch_size=256, shuffle=True)
     data_loader_val = DataLoader(dataset=dataset_val, batch_size=256, shuffle=False)
@@ -55,5 +55,7 @@ def main():
     model = Digit()  # 若有参数则传入参数
     current_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(current_dir)
-    model=torch.load(parent_dir + '/pth/model.pth',map_location='cpu')
+    state_dict = torch.load(parent_dir + '/pth/model.pth',map_location='cpu')
+    model.load_state_dict(state_dict)
+    model.to('cpu')
     return model
