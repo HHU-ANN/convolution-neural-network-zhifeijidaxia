@@ -55,7 +55,9 @@ def main():
     model = Digit()  # 若有参数则传入参数
     current_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(current_dir)
-    state_dict = torch.load(parent_dir + '/pth/model.pth',map_location='cpu')
-    model.load_state_dict(state_dict)
+    model.load_state_dict(torch.load('../pth/model.pth'))
+    #torch.load(model.state_dict(), 'pth/model.pth')
+    #torch.load_state_dict('pth/model.pth')
     model.to('cpu')
     return model
+
