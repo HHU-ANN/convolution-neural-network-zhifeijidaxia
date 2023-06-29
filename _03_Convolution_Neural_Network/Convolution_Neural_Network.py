@@ -42,9 +42,9 @@ class Digit(nn.Module):
 def read_data():
     # 这里可自行修改数据预处理，batch大小也可自行调整
     # 保持本地训练的数据读取和这里一致
-    dataset_train = torchvision.datasets.CIFAR10(root='../data/exp03', train=True, download=False,
+    dataset_train = torchvision.datasets.CIFAR10(root='../data/exp03', train=True, download=True,
                                                  transform=torchvision.transforms.ToTensor())
-    dataset_val = torchvision.datasets.CIFAR10(root='../data/exp03', train=False, download=False,
+    dataset_val = torchvision.datasets.CIFAR10(root='../data/exp03', train=False, download=True,
                                                transform=torchvision.transforms.ToTensor())
     data_loader_train = DataLoader(dataset=dataset_train, batch_size=256, shuffle=True)
     data_loader_val = DataLoader(dataset=dataset_val, batch_size=256, shuffle=False)
