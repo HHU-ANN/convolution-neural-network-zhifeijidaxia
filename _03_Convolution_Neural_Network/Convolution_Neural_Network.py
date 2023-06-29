@@ -59,6 +59,6 @@ def main():
     #torch.load(model.state_dict(), 'pth/model.pth')
     #torch.load_state_dict('pth/model.pth')
     model.to('cpu')
-    return model
+    return  model
 
 
