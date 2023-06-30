@@ -95,6 +95,7 @@ class ResNet(nn.Module):
             layers.append(block(out_channels, out_channels))
         return nn.Sequential(*layers)
 
+
     def forward(self, x):
         out = self.conv(x)
         out = self.bn(out)
