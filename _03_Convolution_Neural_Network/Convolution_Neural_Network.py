@@ -17,16 +17,17 @@ class Digit(nn.Module):
     def __init__(self):
         super().__init__()
         #先添加2个卷积层
-        self.conv1=nn.Conv2d(1,10,5) #其中1代表灰度图片的通道 10：输出通道，5：卷积核
-        self.conv2=nn.Conv2d(10,20,3) #10:输入通道 20：输出通道 3：卷积核大小
+        self.conv1=nn.Conv2d(3,10,3) #其中1代表灰度图片的通道 10：输出通道，5：卷积核
+        self.conv2=nn.Conv2d(10,20,1) #10:输入通道 20：输出通道 3：卷积核大小
         #在添加一个全连接层
         self.fc1=nn.Linear(20*10*10,500)      #20*10*10:输入通道 500：输出通道
         self.fc2=nn.Linear(500,10)            #500：输入通道  10：输出通道
+
     def forward(self,x):
         input_size=x.size(0)    #batch_size
-        x=self.conv1(x) #输入:batch*1*28*28, 输出:batch*10*24*24
+        x=self.conv1(x) #输入:batch*3*28*28, 输出:batch*10*24*24
         x=F.relu(x)     #保持shape不变
-        x=F.max_pool2d(x,2,2)    #输入：batch*10*24*24 输出:batch*10*12*12
+        x=F.max_pool2d(x,3,3)    #输入：batch*10*24*24 输出:batch*10*12*12
 
         x=self.conv2(x)           #输入：batch*12*12   输出：batch*20*10*10
         x=F.relu(x)
